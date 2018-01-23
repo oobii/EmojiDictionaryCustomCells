@@ -9,7 +9,7 @@
 import Foundation
 
 
-// Our Model
+// Our Model 
 
 class Emoji {
     var symbol: String
