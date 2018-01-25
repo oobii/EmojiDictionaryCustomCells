@@ -1,6 +1,10 @@
 # EmojiDictionary
 UITableViewController
 
+We created a project. Dleted the default View Controller from the Main.storyboard. Drag Navigation controller on to the Storyboard scene, it takes with it a Table View Controller. Set the navigation controller to be the initial view controlle
+
+
+
 A dynamic table view object must have a data source object—and may or may not have a delegate object.
 The data source, which adopts the UITableViewDataSource protocol, is responsible for providing the necessary data to the table view object.
 
