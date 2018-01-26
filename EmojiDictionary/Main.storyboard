@@ -48,7 +48,13 @@
                             <outlet property="delegate" destination="Qk6-MF-w3S" id="z35-2H-Ocd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="K's Emoji App" id="M3G-wu-FFJ"/>
+                    <navigationItem key="navigationItem" title="K's Emoji App" id="M3G-wu-FFJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="YcX-OJ-RDz">
+                            <connections>
+                                <action selector="editButtonTapped:" destination="Qk6-MF-w3S" id="zDb-TD-ul3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuM-Xj-epU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
