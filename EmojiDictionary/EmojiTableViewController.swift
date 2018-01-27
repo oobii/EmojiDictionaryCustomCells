@@ -6,16 +6,32 @@
 //  Copyright © 2018 oobii. All rights reserved.
 //
 
+//TODO:
+//Using an array of arrays, separate your emoji into sections using the same
+//grouping as Apple's emoji keyboard: Smileys & People, Animals & Nature,
+//Food & Drink, Activity, Travel & Places, Obects, Symbols, Flags. Update your table view data source to display the sectioned data.
+
+
+
+
+
+
 import UIKit
 
 class EmojiTableViewController: UITableViewController {
     
-    
+    // Going into editing mode by tapping this left button
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         let tableViewEdditingMode = tableView.isEditing
         tableView.setEditing(!tableViewEdditingMode, animated: true)
         
     }
+    
+    var emojiSections: [[Emoji]] = [
+        [Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness")],
+        [Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"), Emoji(symbol: "🐸", name: "Frog" , description: "Green frog" , usage: "Pond" ),Emoji(symbol: "🐢", name: "Turtle" , description: "Wise turtle", usage: "slow")],
+        [Emoji(symbol: "🍕", name:"Pizza" , description: "Slice of pizza", usage:"Food"),
+         Emoji(symbol:"🎂" , name:"Birthday cake" , description:"Desert" , usage:"Yummy" )]]
     
     var emojis: [Emoji] = [
         Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness"),
@@ -38,12 +54,21 @@ class EmojiTableViewController: UITableViewController {
         Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
         ]
     
+    
+    // If you want to refresh the table view with new data when a user returns to the view
+    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
+        
+        // Simple way of getting into Editting Mode for rows
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationItem.rightBarButtonItem = editButtonItem
     }
