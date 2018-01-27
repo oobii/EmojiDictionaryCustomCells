@@ -11,6 +11,7 @@
 //grouping as Apple's emoji keyboard: Smileys & People, Animals & Nature,
 //Food & Drink, Activity, Travel & Places, Obects, Symbols, Flags. Update your table view data source to display the sectioned data.
 
+// TODO work on re-ordering func
 
 
 
@@ -27,7 +28,9 @@ class EmojiTableViewController: UITableViewController {
         
     }
     
-    var emojiSections: [[Emoji]] = [
+    var sectionTitles: [String] = ["Section 0", "Section 1", "Section 3"]
+    
+    var emoji2D: [[Emoji]] = [
         [Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness")],
         [Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"), Emoji(symbol: "🐸", name: "Frog" , description: "Green frog" , usage: "Pond" ),Emoji(symbol: "🐢", name: "Turtle" , description: "Wise turtle", usage: "slow")],
         [Emoji(symbol: "🍕", name:"Pizza" , description: "Slice of pizza", usage:"Food"),
@@ -82,26 +85,34 @@ class EmojiTableViewController: UITableViewController {
     
     // Number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return emoji2D.count
     }
     
     // Number of rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            return emojis.count
-        }
-        else {
-            return 0
-        }
+      
+            return emoji2D[section].count
+   
     }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+    
     
     // returm cell based on Emoji.swift Model
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmojiCell", for: indexPath)
         
-        let emoji = emojis[indexPath.row]
+        let emoji = emoji2D[indexPath.section][indexPath.row]
         // Configure the cell...
         cell.textLabel?.text = "\(emoji.symbol) - \(emoji.name)"
         cell.detailTextLabel?.text = "\(emoji.description) - \(emoji.usage)"
@@ -111,20 +122,20 @@ class EmojiTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let emoji = emojis[indexPath.row]
+        let emoji = emoji2D[indexPath.section][indexPath.row]
         print("\(emoji.symbol) indexPath = \(indexPath)")
     }
     
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        
-        let emojiToMove = emojis.remove(at: fromIndexPath.row)
-        emojis.insert(emojiToMove, at: to.row)
-        
-        tableView.reloadData()
-        
-    }
-    
+//    // Override to support rearranging the table view.
+//    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+//        
+//        let emojiToMove = emojis.remove(at: fromIndexPath.row)
+//        emojis.insert(emojiToMove, at: to.row)
+//        
+//        tableView.reloadData()
+//        
+//    }
+//    
     // To remove Delete indicator
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .delete
