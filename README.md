@@ -31,6 +31,7 @@ tableView(_:didSelectRowAt:)
 ```
 In EmojiDictionary app, you're using a table view controller to manage the table view. That means the table view delegate is already assigned as the table view controller itself, just like the data source. Add the didSelectRow method. 
 
+![EmojiDictionarySection.png](https://github.com/oobii/EmojiDictionary/blob/EmojiDictionarySections/EmojiDictionarySection.png)
 
 
 
