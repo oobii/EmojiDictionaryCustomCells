@@ -28,35 +28,45 @@ class EmojiTableViewController: UITableViewController {
         
     }
     
-    var sectionTitles: [String] = ["Section 0", "Section 1", "Section 3"]
+    var sectionTitles: [String] = ["Section 0", "Section 1", "Section 3","Misc"]
     
     var emoji2D: [[Emoji]] = [
         [Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness")],
         [Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"), Emoji(symbol: "🐸", name: "Frog" , description: "Green frog" , usage: "Pond" ),Emoji(symbol: "🐢", name: "Turtle" , description: "Wise turtle", usage: "slow")],
         [Emoji(symbol: "🍕", name:"Pizza" , description: "Slice of pizza", usage:"Food"),
-         Emoji(symbol:"🎂" , name:"Birthday cake" , description:"Desert" , usage:"Yummy" )]]
-    
-    var emojis: [Emoji] = [
-        Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness"),
-        Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"),
-        Emoji(symbol: "🐸", name: "Frog" , description: "Green frog" , usage: "Pond" ),
-        Emoji(symbol: "🐢", name: "Turtle" , description: "Wise turtle", usage: "slow"),
-        Emoji(symbol: "🍕", name:"Pizza" , description: "Slice of pizza", usage:"Food"),
-        Emoji(symbol:"🏐" , name: "Volleyball", description:"White volleyball", usage:"Sports" ),
-        Emoji(symbol:"⏰", name:"Alarm clock" , description:"Red clock" , usage:"Waking up"),
-        Emoji(symbol:"🇨🇦" , name:"Canada flag", description:"Red and white flag", usage:"Country" ),
-        Emoji(symbol:"👀", name:"Eyes" , description:"Two eyes" , usage:"To see" ),
-        Emoji(symbol:"🚲" , name:"Bycicle" , description:"Blue bike", usage:"Getting around"),
-        Emoji(symbol:"🌈" , name:"Rainbow", description:"seven coulors" , usage:"Rain and sun" ),
-        Emoji(symbol:"🎹" , name:"Musical keyboard" , description:"Piano" , usage:"Playing music" ),
+         Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
+         Emoji(symbol:"🎂" , name:"Birthday cake" , description:"Desert" , usage:"Yummy" )],
+        [Emoji(symbol:"🚲" , name:"Bycicle" , description:"Blue bike", usage:"Getting around"),
+         Emoji(symbol:"🌈" , name:"Rainbow", description:"seven coulors" , usage:"Rain and sun" ),
+         Emoji(symbol:"🎹" , name:"Musical keyboard" , description:"Piano" , usage:"Playing music" ),
         Emoji(symbol:"📎" , name:"Paperclip" , description:"Grey clip" , usage:"Attachment"),
-        Emoji(symbol:"💚" , name:"Green heart" , description:"Shape" , usage:"Love" ),
-        Emoji(symbol:"🎂" , name:"Birthday cake" , description:"Desert" , usage:"Yummy" ),
         Emoji(symbol:"☃️" , name:"Snowman" , description:"Winter" , usage:"Build" ),
-        Emoji(symbol:"🌹" , name:"Rose" , description:"Flower" , usage:"Smells good"),
-        Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
-        ]
-    
+        Emoji(symbol:"⏰", name:"Alarm clock" , description:"Red clock" , usage:"Waking up"),
+        Emoji(symbol:"🏐" , name: "Volleyball", description:"White volleyball", usage:"Sports" ),
+        Emoji(symbol:"🏐" , name: "Volleyball", description:"White volleyball", usage:"Sports" ),]
+    ]
+    /*
+     var emojis: [Emoji] = [
+     Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness"),
+     Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"),
+     Emoji(symbol: "🐸", name: "Frog" , description: "Green frog" , usage: "Pond" ),
+     Emoji(symbol: "🐢", name: "Turtle" , description: "Wise turtle", usage: "slow"),
+     Emoji(symbol: "🍕", name:"Pizza" , description: "Slice of pizza", usage:"Food"),
+     Emoji(symbol:"🏐" , name: "Volleyball", description:"White volleyball", usage:"Sports" ),
+     Emoji(symbol:"⏰", name:"Alarm clock" , description:"Red clock" , usage:"Waking up"),
+     Emoji(symbol:"🏐" , name: "Volleyball", description:"White volleyball", usage:"Sports" ),
+     Emoji(symbol:"👀", name:"Eyes" , description:"Two eyes" , usage:"To see" ),
+     Emoji(symbol:"🚲" , name:"Bycicle" , description:"Blue bike", usage:"Getting around"),
+     Emoji(symbol:"🌈" , name:"Rainbow", description:"seven coulors" , usage:"Rain and sun" ),
+     Emoji(symbol:"🎹" , name:"Musical keyboard" , description:"Piano" , usage:"Playing music" ),
+     Emoji(symbol:"📎" , name:"Paperclip" , description:"Grey clip" , usage:"Attachment"),
+     Emoji(symbol:"💚" , name:"Green heart" , description:"Shape" , usage:"Love" ),
+     Emoji(symbol:"🎂" , name:"Birthday cake" , description:"Desert" , usage:"Yummy" ),
+     Emoji(symbol:"☃️" , name:"Snowman" , description:"Winter" , usage:"Build" ),
+     Emoji(symbol:"🌹" , name:"Rose" , description:"Flower" , usage:"Smells good"),
+     Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
+     ]
+     */
     
     // If you want to refresh the table view with new data when a user returns to the view
     
@@ -90,9 +100,9 @@ class EmojiTableViewController: UITableViewController {
     
     // Number of rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-            return emoji2D[section].count
-   
+        
+        return emoji2D[section].count
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -126,16 +136,14 @@ class EmojiTableViewController: UITableViewController {
         print("\(emoji.symbol) indexPath = \(indexPath)")
     }
     
-//    // Override to support rearranging the table view.
-//    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-//        
-//        let emojiToMove = emojis.remove(at: fromIndexPath.row)
-//        emojis.insert(emojiToMove, at: to.row)
-//        
-//        tableView.reloadData()
-//        
-//    }
-//    
+    //    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+        
+        let emojiToMove = emoji2D[fromIndexPath.section].remove(at: fromIndexPath.row)
+        emoji2D[to.section].insert(emojiToMove, at: to.row)
+        tableView.reloadData()
+    }
+    
     // To remove Delete indicator
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .delete
@@ -156,7 +164,9 @@ class EmojiTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             //tableView.deleteRows(at: [indexPath], with: .fade)
-            let emojiToDelete = emojis.remove(at: indexPath.row)
+            //let emojiToDelete = emojis.remove(at: indexPath.row)
+            
+            let emojiToDelete = emoji2D[indexPath.section].remove(at: indexPath.row)
             print("Deleting \(emojiToDelete.symbol)")
             tableView.reloadData()
             
