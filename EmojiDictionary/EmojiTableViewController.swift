@@ -11,12 +11,6 @@ import UIKit
 class EmojiTableViewController: UITableViewController {
     
     
-    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
-        let tableViewEdditingMode = tableView.isEditing
-        tableView.setEditing(!tableViewEdditingMode, animated: true)
-        
-    }
-    
     var emojis: [Emoji] = [
         Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness"),
         Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"),
@@ -45,7 +39,7 @@ class EmojiTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        navigationItem.rightBarButtonItem = editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     override func didReceiveMemoryWarning() {
@@ -78,18 +72,21 @@ class EmojiTableViewController: UITableViewController {
         
         let emoji = emojis[indexPath.row]
         // Configure the cell...
-//        cell.textLabel?.text = "\(emoji.symbol) - \(emoji.name)"
-//        cell.detailTextLabel?.text = "\(emoji.description) - \(emoji.usage)"
-    
+        //        cell.textLabel?.text = "\(emoji.symbol) - \(emoji.name)"
+        //        cell.detailTextLabel?.text = "\(emoji.description) - \(emoji.usage)"
+        
         cell.update(with: emoji)
         cell.showsReorderControl = true
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let emoji = emojis[indexPath.row]
-        print("\(emoji.symbol) indexPath = \(indexPath)")
-    }
+    // Commented out because we created a segue from Cell to static ViewController
+    // so pressing on cell would segue to it, and we dont want that
+    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        let emoji = emojis[indexPath.row]
+    //        print("\(emoji.symbol) indexPath = \(indexPath)")
+    //    }
+   
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
