@@ -86,13 +86,13 @@ class EmojiTableViewController: UITableViewController {
         return cell
     }
     
-//    // Commented out because we created a segue from Cell to static ViewController
-//    // so pressing on cell would segue to it, and we dont want that
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let emoji = emojis[indexPath.row]
-//        print("\(emoji.symbol) indexPath = \(indexPath)")
-//        performSegue(withIdentifier: "Edit", sender: nil)
-//    }
+    //    // Commented out because we created a segue from Cell to static ViewController
+    //    // so pressing on cell would segue to it, and we dont want that
+    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        let emoji = emojis[indexPath.row]
+    //        print("\(emoji.symbol) indexPath = \(indexPath)")
+    //        performSegue(withIdentifier: "Edit", sender: nil)
+    //    }
     
     
     // Override to support rearranging the table view.
@@ -155,11 +155,11 @@ class EmojiTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if segue.identifier == "Edit" {
+        if segue.identifier == "EditEmoji" {
             
             let indexPath = tableView.indexPathForSelectedRow!
             let emoji = emojis[indexPath.row]
-           let addEditEmojiTableViewController = segue.destination as! AddEditEmojiTVC
+            let addEditEmojiTableViewController = segue.destination as! AddEditEmojiTableViewController
             
             addEditEmojiTableViewController.emoji = emoji
             
