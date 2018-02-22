@@ -32,6 +32,12 @@ class EmojiTableViewController: UITableViewController {
         Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
         ]
     
+    @IBAction func unwindToEmojiTabkeViewController(unwindSegue: UIStoryboardSegue) {
+        
+    }
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,13 +86,14 @@ class EmojiTableViewController: UITableViewController {
         return cell
     }
     
-    // Commented out because we created a segue from Cell to static ViewController
-    // so pressing on cell would segue to it, and we dont want that
-    //    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        let emoji = emojis[indexPath.row]
-    //        print("\(emoji.symbol) indexPath = \(indexPath)")
-    //    }
-   
+//    // Commented out because we created a segue from Cell to static ViewController
+//    // so pressing on cell would segue to it, and we dont want that
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let emoji = emojis[indexPath.row]
+//        print("\(emoji.symbol) indexPath = \(indexPath)")
+//        performSegue(withIdentifier: "Edit", sender: nil)
+//    }
+    
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -140,14 +147,25 @@ class EmojiTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "Edit" {
+            
+            let indexPath = tableView.indexPathForSelectedRow!
+            let emoji = emojis[indexPath.row]
+           let addEditEmojiTableViewController = segue.destination as! AddEditEmojiTVC
+            
+            addEditEmojiTableViewController.emoji = emoji
+            
+        }
+        
+    }
+    
     
 }
