@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddEditEmojiTVC: UITableViewController {
+class AddEditEmojiTableViewController: UITableViewController {
 
     var emoji: Emoji?
     
