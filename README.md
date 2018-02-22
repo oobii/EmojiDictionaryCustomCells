@@ -12,9 +12,16 @@ Example of building static TableView(ADwS p:545):<br>
 * Make  the new TableView Controller a static one with fixed number of rows 
 
 #### Static Table View
-In the new table view controller scene, select the table view and open the Attributes inspector. Change the Content to Static Cells.
+In the new table view controller scene, select the table view and open the Attributes inspector. Change the Content to **Static** Cells.
 
-You can now start to build your static table view. In the Attributes inspector, adjust the number of sections to four, with one row each. Next, adjust the Style of the table view to Grouped, then add the following section headers: "Symbol", "Name", "Description", and "Usage". To update section information, such as headers and footers, select the section in the Document Outline, then use the Attributes inspector. Add a text field in each cell, and don't forget to add constraints to cover the entire cell.
+You can now start to build your static table view. In the Attributes inspector
+1. adjust the number of sections to four, with one row each
+Table View>Content>Static Cells
+In Document Outline under Section-1 delete 2 out of 3 Cells
+2. adjust the Style of the table view to Grouped
+3. then add the following section headers: "Symbol", "Name", "Description", and "Usage".
+4. To update section information, such as headers and footers, select the section in the Document Outline, then use the Attributes inspector.
+5. Add a text field in each cell, and don't forget to add constraints to cover the entire cell.
 
 ![storyboard](https://github.com/oobii/EmojiDictStaticTableView/blob/StaticTableView/StaticTableViewStoryboard.png)
 
