@@ -25,3 +25,15 @@ In Document Outline under Section-1 delete 2 out of 3 Cells
 
 ![storyboard](https://github.com/oobii/EmojiDictStaticTableView/blob/StaticTableView/StaticTableViewStoryboard.png)
 
+### Implementation of Automatic row height
+To avod truncation of a long text lines add this to ```viewDidLoad(...)```
+```swift
+“tableView.rowHeight = UITableViewAutomaticDimension
+tableView.estimatedRowHeight = 44.0
+```
+Set the bottom label's number of lines to 0 in the Attributes inspector.<br>
+
+#### Set Compression Resistance
+Every view has a default compression resistance value of 750 - that is, how resistant the view is to shrinking. In the Attributes inspector, set the top label's compression resistance to 751, telling the Auto Layout engine that it has a higher priority than everything else to not shrink, including the cell, itself. Set the bottom label's compression resistance to 752 so that it is resistant to shrinking as well (a value of 751 would still contain ambiguity between the two labels). Since the vertical stack view continues to have a compression resistance value of 750, the Auto Layout engine understands that the stack view will grow to accommodate the larger amount of text. The stack view height increase will be taken into account when the table view calculated the cell height via UITableViewAutomaticDimension.<br>
+
+
