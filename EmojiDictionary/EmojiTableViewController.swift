@@ -33,6 +33,15 @@ class EmojiTableViewController: UITableViewController {
         ]
     
     
+    @IBAction func refreshControlActivated(_ sender: UIRefreshControl) {
+        // Network fetch or other operation that updates the array of data displayed in the table view
+        
+        tableView.reloadData()
+        sender.endRefreshing()  //this line ends the animation
+
+    }
+    
+    
     // We get here when we press "Cancel" or "Save" in the AddEditEmojiTableViewController
     @IBAction func unwindToEmojiTabkeViewController(unwindSegue: UIStoryboardSegue) {
         
@@ -64,7 +73,7 @@ class EmojiTableViewController: UITableViewController {
                     
                     
                 }
-            
+                
             }
         }
         
@@ -82,12 +91,12 @@ class EmojiTableViewController: UITableViewController {
         navigationItem.leftBarButtonItem = editButtonItem
         
         // To deal with multiline descriptions
-        // also need to set compression resistance 
+        // also need to set compression resistance
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44.0
         
         
-
+        
     }
     
     override func didReceiveMemoryWarning() {
