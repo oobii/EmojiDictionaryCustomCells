@@ -8,7 +8,11 @@
 
 import UIKit
 
+
+
 class AddEditEmojiTableViewController: UITableViewController {
+    
+    var emoji: Emoji?
     
     @IBOutlet weak var symbolTextField: UITextField!
     
@@ -18,8 +22,12 @@ class AddEditEmojiTableViewController: UITableViewController {
     
     @IBOutlet weak var usageTextField: UITextField!
     
-    var emoji: Emoji?
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    
+    @IBAction func textEditingChanged(_ sender: UITextField) {
+        updateSaveButtonState()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +45,23 @@ class AddEditEmojiTableViewController: UITableViewController {
             usageTextField.text = emojiLocal.usage
         }
         
+        updateSaveButtonState()
+        
     }
+    
+    
+    func updateSaveButtonState() {
+        
+        let symbolText = symbolTextField.text ?? ""
+        let nameText = nameTextField.text  ?? ""
+        let descriptionText = descriptionTextField.text ?? ""
+        let usageText = usageTextField.text ?? ""
+        
+        // disable Save button is fields are empty
+        saveButton.isEnabled = !symbolText.isEmpty && !nameText.isEmpty && !descriptionText.isEmpty && !usageText.isEmpty
+        
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -101,14 +125,27 @@ class AddEditEmojiTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - Navigation
     
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        
+        super.prepare(for: segue, sender: sender)
+        
+        guard segue.identifier == "saveUnwind" else { return }
+        
+        let symbolText = symbolTextField.text ?? ""
+        let nameText = nameTextField.text  ?? ""
+        let descriptionText = descriptionTextField.text ?? ""
+        let usageText = usageTextField.text ?? ""
+        
+        emoji = Emoji(symbol: symbolText, name: nameText, description: descriptionText, usage: usageText)
+            
+    
+}
+
+
 }

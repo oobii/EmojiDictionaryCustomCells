@@ -32,7 +32,41 @@ class EmojiTableViewController: UITableViewController {
         Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
         ]
     
+    
+    // We get here when we press "Cancel" or "Save" in the AddEditEmojiTableViewController
     @IBAction func unwindToEmojiTabkeViewController(unwindSegue: UIStoryboardSegue) {
+        
+        guard unwindSegue.identifier == "saveUnwind" else { return }
+        
+        if let sourceViewController = unwindSegue.source as? AddEditEmojiTableViewController {
+            
+            if let emoji = sourceViewController.emoji {
+                
+                // if the table view still has a selected row
+                if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                    
+                    emojis[selectedIndexPath.row] = emoji
+                    
+                    // the array of rows to reload contains only one row/cell
+                    tableView.reloadRows(at: [selectedIndexPath], with: .none)
+                    
+                } else {
+                    
+                    // getting IndexPath just after our last row
+                    
+                    // IndexPath is an array
+                    let newIndexPath = IndexPath(row: emojis.count, section: 0)
+                    
+                    // adding new emoji to the array
+                    emojis.append(emoji)
+                    
+                    tableView.insertRows(at: [newIndexPath], with: .automatic)
+                    
+                    
+                }
+            
+            }
+        }
         
     }
     
@@ -46,6 +80,14 @@ class EmojiTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        // To deal with multiline descriptions
+        // also need to set compression resistance 
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44.0
+        
+        
+
     }
     
     override func didReceiveMemoryWarning() {
