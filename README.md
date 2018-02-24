@@ -36,4 +36,15 @@ Set the bottom label's number of lines to 0 in the Attributes inspector.<br>
 #### Set Compression Resistance
 Every view has a default compression resistance value of 750 - that is, how resistant the view is to shrinking. In the Attributes inspector, set the top label's compression resistance to 751, telling the Auto Layout engine that it has a higher priority than everything else to not shrink, including the cell, itself. Set the bottom label's compression resistance to 752 so that it is resistant to shrinking as well (a value of 751 would still contain ambiguity between the two labels). Since the vertical stack view continues to have a compression resistance value of 750, the Auto Layout engine understands that the stack view will grow to accommodate the larger amount of text. The stack view height increase will be taken into account when the table view calculated the cell height via UITableViewAutomaticDimension.<br>
 
-
+#### Refresh Control
+To refresh the TableView and display the spinner:<br>
+Add this code and set Refreshing to "Enabled" in storyboard for TableView Controller.<br>
+```swift
+@IBAction func refreshControlActivated(_ sender: UIRefreshControl) {
+// Network fetch or other operation that updates the array of data displayed in the table view
+   tableView.reloadData()
+   sender.endRefreshing()  //this line ends the animation
+   }
+   
+   
+   ```
