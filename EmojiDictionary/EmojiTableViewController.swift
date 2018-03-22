@@ -11,26 +11,11 @@ import UIKit
 class EmojiTableViewController: UITableViewController {
     
     
-    var emojis: [Emoji] = [
-        Emoji(symbol: "😀", name: "Grinning face", description: "A typical smiley face", usage: "happiness"),
-        Emoji(symbol: "🐘", name: "Elephant", description: "A grey elephant", usage: "Good memory"),
-        Emoji(symbol: "🐸", name: "Frog" , description: "Green frog" , usage: "Pond" ),
-        Emoji(symbol: "🐢", name: "Turtle" , description: "Wise turtle", usage: "slow"),
-        Emoji(symbol: "🍕", name:"Pizza" , description: "Slice of pizza", usage:"Food"),
-        Emoji(symbol:"🏐" , name: "Volleyball", description:"White volleyball", usage:"Sports" ),
-        Emoji(symbol:"⏰", name:"Alarm clock" , description:"Red clock" , usage:"Waking up"),
-        Emoji(symbol:"🇨🇦" , name:"Canada flag", description:"Red and white flag", usage:"Country" ),
-        Emoji(symbol:"👀", name:"Eyes" , description:"Two eyes" , usage:"To see" ),
-        Emoji(symbol:"🚲" , name:"Bycicle" , description:"Blue bike", usage:"Getting around"),
-        Emoji(symbol:"🌈" , name:"Rainbow", description:"seven coulors" , usage:"Rain and sun" ),
-        Emoji(symbol:"🎹" , name:"Musical keyboard" , description:"Piano" , usage:"Playing music" ),
-        Emoji(symbol:"📎" , name:"Paperclip" , description:"Grey clip" , usage:"Attachment"),
-        Emoji(symbol:"💚" , name:"Green heart" , description:"Shape" , usage:"Love" ),
-        Emoji(symbol:"🎂" , name:"Birthday cake" , description:"Desert" , usage:"Yummy" ),
-        Emoji(symbol:"☃️" , name:"Snowman" , description:"Winter" , usage:"Build" ),
-        Emoji(symbol:"🌹" , name:"Rose" , description:"Flower" , usage:"Smells good"),
-        Emoji(symbol:"🍍" , name:"Pineapple" , description:"Large fruit" , usage:"Wear a crown" ),
-        ]
+    var emojis: [Emoji] = [] {
+        willSet(updatedEmojiList) {
+            Emoji.saveToFile(emojis: updatedEmojiList)
+        }
+    }
     
     
     @IBAction func refreshControlActivated(_ sender: UIRefreshControl) {
@@ -56,7 +41,10 @@ class EmojiTableViewController: UITableViewController {
                     
                     emojis[selectedIndexPath.row] = emoji
                     
-                    // the array of rows to reload contains only one row/cell
+                    
+                    
+                     // Model changed we need to tell the tableView right away
+                    // the array of rows to reload contains only one row/cell in our case
                     tableView.reloadRows(at: [selectedIndexPath], with: .none)
                     
                 } else {
@@ -95,6 +83,12 @@ class EmojiTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 44.0
         
+         
+        if let loadedFromFileEmojis = Emoji.loadFromFile() {
+            emojis = loadedFromFileEmojis
+        } else {
+            emojis = Emoji.loadSampleEmojis()
+        }
         
         
     }
@@ -122,7 +116,7 @@ class EmojiTableViewController: UITableViewController {
         }
     }
     
-    // returm cell based on Emoji.swift Model
+    // return cell for displaying based on Emoji.swift Model
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmojiCell", for: indexPath) as! EmojiTableViewCell
